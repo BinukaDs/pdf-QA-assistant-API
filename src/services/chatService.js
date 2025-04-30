@@ -4,13 +4,20 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export const generateAnswer = async (userQuestion,topPages) => {
-    console.log("topPages", userQuestion)
+export const generateAnswer = async (userQuestion, topPages) => {
+  console.log("topPages", userQuestion);
 
   const messages = [
     {
       role: "system",
-      content: `You are an assistant that answers questions based on a document. Only use the provided content. Always include the page number when giving an answer. If the answer is not present, say "Not found."`,
+      content: `You are a document analysis assistant. When given a user question and some document content with page numbers, 
+you must find the exact answer from the provided text only.
+
+Your response must:
+- Directly quote the sentence or value from the page
+- Include the page number like: "(Page 174)"
+- Do not summarize or guess
+- If the answer is not found, respond with: "Not found"`,
     },
     {
       role: "user",
@@ -25,12 +32,11 @@ export const generateAnswer = async (userQuestion,topPages) => {
   ];
 
   const completion = await openai.chat.completions.create({
-    model: "gpt-4-turbo", 
+    model: "gpt-4-turbo",
     messages,
-    temperature: 0, 
+    temperature: 0,
   });
   console.log("Completion: ", completion);
   const answer = completion.choices[0].message.content;
   return answer;
-
 };
