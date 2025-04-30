@@ -53,12 +53,28 @@ export const createJsonEmbeddings = async (req, res) => {
   }
 };
 
-export const createSearchEmbeddings = async (req, res) => {
-  const { userText } = req.body;
-
+export const createSearchEmbeddings = async (userText) => {
   if (!userText) {
-    return res.status(400).json({ message: "No text provided" });
+    return {
+      status: 400,
+      message: "No text provided",
+    };
   } else {
-    // const embedding = await createEmbedding(userText);
+    try {
+
+      const embedding = await createEmbedding(userText);
+      
+      return {
+        status: 200,
+        message: "Embeddings created successfully",
+        data: embedding,
+      };
+    } catch (error) {
+      return {
+        status: 500,
+        message: "Error creating embeddings",
+        error: error.message,
+      };
+    }
   }
 };
