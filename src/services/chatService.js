@@ -5,18 +5,19 @@ const openai = new OpenAI({
 });
 
 export const generateAnswer = async (userQuestion, topPages) => {
-  console.log("topPages", userQuestion);
+  // console.log("topPages", userQuestion);
 
   const messages = [
     {
       role: "system",
       content: `You are a document analysis assistant. When given a user question and some document content with page numbers, 
-you must find the exact answer from the provided text only.
+you must find the exact answer from the provided text only and.
 
 Your response must:
-- Directly quote the sentence or value from the page
+- Directly quote the sentence or value from the Page
+- Truncate the quote limiting it to 50 letters. and put "...". And Don't include the whole paragraph.
 - Include the page number like: "(Page 174)"
-- Do not summarize or guess
+- Do not summarize or guess 
 - If the answer is not found, respond with: "Not found"`,
     },
     {
@@ -36,7 +37,7 @@ Your response must:
     messages,
     temperature: 0,
   });
-  console.log("Completion: ", completion);
+  // console.log("Completion: ", completion);
   const answer = completion.choices[0].message.content;
   return answer;
 };

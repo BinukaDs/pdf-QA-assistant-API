@@ -1,11 +1,12 @@
 import { createSearchEmbeddings } from "./embeddingService.js";
 import { generateAnswer } from "./chatService.js";
 import fs from "fs";
-import path, { parse } from "path";
+import path from "path";
 
 const jsonFilePath = path.join(process.cwd(), "data", "embeddings.json");
 const jsonData = fs.readFileSync(jsonFilePath, "utf8");
 const parsedData = JSON.parse(jsonData);
+
 export const searchEmbeddings = async (req, res) => {
   const { userText } = req.body;
 
@@ -37,7 +38,7 @@ export const searchEmbeddings = async (req, res) => {
 
       const answer = await generateAnswer(userText, topPages);
       if (answer) {
-        console.log("Answer: ", answer);
+        // console.log("Answer: ", answer);
         res.status(200).json({
           message: "Answer generated successfully",
           answer: answer,
@@ -48,8 +49,6 @@ export const searchEmbeddings = async (req, res) => {
           message: "No answer found",
         });
       }
-
-      
     } else {
       res.status(embedding.status).json({
         message: "Error creating embeddings",

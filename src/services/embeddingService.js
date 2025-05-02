@@ -28,12 +28,12 @@ export const createJsonEmbeddings = async (req, res) => {
   try {
     const embeddings = await Promise.all(
       parsedData.map(async (page) => {
-        const embedding = await createEmbedding(page.text);
-        return {
-          page: page.page,
-          text: page.text,
-          embedding: embedding,
-        };
+          const embedding = await createEmbedding(page.text);
+            return {
+              page: page.page,
+              text: page.text,
+              embedding: embedding,
+            };
       })
     );
 
@@ -61,9 +61,8 @@ export const createSearchEmbeddings = async (userText) => {
     };
   } else {
     try {
-
       const embedding = await createEmbedding(userText);
-      
+
       return {
         status: 200,
         message: "Embeddings created successfully",

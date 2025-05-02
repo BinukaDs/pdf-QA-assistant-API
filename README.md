@@ -6,7 +6,7 @@ It uses:
 - 🔍 OpenAI Embedding API (`text-embedding-ada-002`) for semantic document search
 - 🧠 OpenAI Chat API (`gpt-4-turbo`) for generating natural language responses
 - 📄 `pdf-parse` for reading and extracting text from PDF documents
-- 🟦 Node.js + TypeScript for building the server and processing logic
+- 🟦 Node.js for building the server and processing logic
 
 ---
 
@@ -36,6 +36,16 @@ npm install
 ```env
 OPENAI_API_KEY=your-openai-api-key
 PORT=3000
+```
+
+### 4. Provide a PDF file
+
+    Add a PDF file to the ```/uploads``` folder
+
+
+### 5. Run
+```bash
+npm run dev
 ```
 
 ## 🔐 Requirements
