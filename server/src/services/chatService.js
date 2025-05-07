@@ -17,6 +17,7 @@ Your response must:
 - Directly quote the sentence or value from the Page
 - Truncate the quote limiting it to 50 letters. and put "...". And Don't include the whole paragraph.
 - Include the page number like: "(Page 174)"
+- calculate the pageNumber always (pagenumber - 5)
 - Do not summarize or guess 
 - If the answer is not found, respond with: "Not found"`,
     },

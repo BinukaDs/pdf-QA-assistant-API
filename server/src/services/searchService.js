@@ -8,12 +8,12 @@ const jsonData = fs.readFileSync(jsonFilePath, "utf8");
 const parsedData = JSON.parse(jsonData);
 
 export const searchEmbeddings = async (req, res) => {
-  const { userText } = req.body;
+  const { userQuestion } = req.body;
 
-  if (!userText) {
+  if (!userQuestion) {
     return res.status(400).json({ message: "No text provided" });
   } else {
-    const embedding = await createSearchEmbeddings(userText);
+    const embedding = await createSearchEmbeddings(userQuestion);
     // console.log("Embedding created successfully: ", embedding);
     if (embedding.status === 200) {
       const searchEmbedding = embedding.data;
@@ -36,7 +36,7 @@ export const searchEmbeddings = async (req, res) => {
         return parsedData.find((p) => p.page === score.page);
       });
 
-      const answer = await generateAnswer(userText, topPages);
+      const answer = await generateAnswer(userQuestion, topPages);
       if (answer) {
         // console.log("Answer: ", answer);
         res.status(200).json({
