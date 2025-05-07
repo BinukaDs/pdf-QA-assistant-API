@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon app.js",
-    "build": "babel src -d dist --copy-files"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
