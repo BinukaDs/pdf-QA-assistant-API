@@ -11,10 +11,6 @@
           "src": "/(.*)",
           "dest": "/"
       }
-  ],
-  "functions": {
-    "server/src/services/**/*.js": {
-      "includeFiles": "server/uploads/page-data.json"
-    }
-  }
+  ]
+  
 }
