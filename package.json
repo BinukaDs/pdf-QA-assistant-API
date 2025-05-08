@@ -1,7 +1,9 @@
 {
-    "type": "module",
-    "scripts": {
-      "build": "cd frontend && npm install && npm run build"
-    }
+  "type": "module",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
-  
+}
