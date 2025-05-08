@@ -1,7 +1,13 @@
 import PdfParse from "pdf-parse";
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const dataBuffer = fs.readFileSync("./uploads/sample.pdf");
+const dataBuffer = fs.readFileSync(
+  path.join(__dirname, "../../uploads/sample.pdf")
+);
 
 export const parsePDF = async (req, res) => {
   try {
@@ -17,7 +23,7 @@ export const parsePDF = async (req, res) => {
     });
 
     fs.writeFileSync(
-      `./uploads/page-data.json`,
+      path.join(__dirname, "../../uploads/page-data.json"),
       JSON.stringify(writeData, null, 2)
     );
 
