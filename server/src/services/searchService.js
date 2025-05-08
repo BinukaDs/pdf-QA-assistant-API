@@ -1,10 +1,14 @@
 import { createSearchEmbeddings } from "./embeddingService.js";
 import { generateAnswer } from "./chatService.js";
-import fs from "fs";
-import path from "path";
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 
-const jsonFilePath = path.join(process.cwd(), "data", "embeddings.json");
-const jsonData = fs.readFileSync(jsonFilePath, "utf8");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const jsonFilePath = path.join(__dirname, '../../data/embeddings.json');
+const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
 const parsedData = JSON.parse(jsonData);
 
 export const searchEmbeddings = async (req, res) => {
