@@ -1,11 +1,15 @@
 import OpenAI from "openai";
-import fs from "fs";
-import path from "path";
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const jsonFilePath = path.join(process.cwd(), "uploads", "page-data.json");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const jsonFilePath = path.join(__dirname, "../../uploads/page-data.json");
 const jsonData = fs.readFileSync(jsonFilePath, "utf8");
 const parsedData = JSON.parse(jsonData);
 
@@ -28,12 +32,12 @@ export const createJsonEmbeddings = async (req, res) => {
   try {
     const embeddings = await Promise.all(
       parsedData.map(async (page) => {
-          const embedding = await createEmbedding(page.text);
-            return {
-              page: page.page,
-              text: page.text,
-              embedding: embedding,
-            };
+        const embedding = await createEmbedding(page.text);
+        return {
+          page: page.page,
+          text: page.text,
+          embedding: embedding,
+        };
       })
     );
 
