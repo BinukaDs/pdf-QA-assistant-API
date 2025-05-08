@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [],
