@@ -2,10 +2,7 @@
   "version": 2,
   "functions": {
     "api/express.js": {
-      "includeFiles": [
-        "server/uploads/sample.pdf",
-        "server/uploads/page-data.json"
-      ]
+      "includeFiles": "server/uploads/**"
     }
   },
   "routes": [
