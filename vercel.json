@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/express.js": {
-      "includeFiles": "{test/data/**,server/uploads/**}"
+      "includeFiles": "{server/uploads/**,test/data/**}"
     }
   },
   "routes": [
