@@ -2,10 +2,7 @@
   "version": 2,
   "functions": {
     "api/express.js": {
-      "includeFiles": [
-        "test/data/05-versions-space.pdf",
-        "server/uploads/**"
-      ]
+      "includeFiles": "{test/data/**,server/uploads/**}"
     }
   },
   "routes": [
