@@ -25,6 +25,7 @@ app.get("/pdf/parse", parsePDF);
 app.get("/embeddings/create", createJsonEmbeddings);
 app.post("/embeddings/search", searchEmbeddings);
 
-app.listen(3000);
+// app.listen(3000);
+export default app;
 
  
