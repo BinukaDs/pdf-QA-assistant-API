@@ -8,6 +8,5 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/index.js" }
-  ],
-  "trailingSlash": false
+  ]
 }

@@ -31,7 +31,7 @@ function App() {
 
     console.log("Response without answer: ", Responses);
     if (userQuestion != "") {
-      await axios.post(`${BASE}/embeddings/search`, {
+      await axios.post(`${BASE}/embeddings/search/`, {
         userQuestion: userQuestion
       }).then((res) => {
         console.log(res.data);
