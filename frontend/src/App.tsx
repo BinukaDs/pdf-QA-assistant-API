@@ -71,7 +71,7 @@ function App() {
     <section className=' flex flex-col h-screen'>
 
       <div className='flex p-4 px-16 top-0 fixed bg-gray-50 w-full rounded-b-xl items-center gap-3 justify-between'>
-        <img src="/dimo-logo.svg" width={"120px"} alt="Logo" />
+        {/* <img src="/dimo-logo.svg" width={"120px"} alt="Logo" /> */}
         <h1 className='text-xl font-bold'>AI PDF QA Assistant</h1>
       </div>
 

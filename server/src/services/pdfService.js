@@ -6,9 +6,6 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// const dataBuffer = fs.readFileSync(
-//   path.join(__dirname, "../../uploads/sample.pdf")
-// );
 const response = await fetch(
   "http://triad.lk/demo/dimo2024/v4/pdf/DIMO-PLC-Annual-Report-2023-2024.pdf"
 );
