@@ -8,11 +8,15 @@ import { parsePDF } from "./src/services/pdfService.js";
 import { searchEmbeddings } from "./src/services/searchService.js";
 const app = express();
 
+
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
   })
 );
+
+app.options('*', cors()); 
 
 app.use(express.json());
 
