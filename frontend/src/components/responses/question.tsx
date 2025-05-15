@@ -10,7 +10,7 @@ const QuestionBox = ({ text }: { text: string }) => {
                 delay: 0.5,
                 ease: [0, 0.71, 0.2, 1.01],
             }}
-            className='rounded-xl bg-gray-100 py-3 px-5 max-w-1/3 justify-self-end'>
+            className='rounded-xl bg-gray-100 py-3 px-5 max-w-3/4 md:max-w-1/3 justify-self-end'>
             {text}
         </motion.div>
     )

@@ -70,16 +70,16 @@ function App() {
   return (
     <section className=' flex flex-col h-screen'>
 
-      <div className='flex p-4 px-16 top-0 fixed bg-gray-50 w-full rounded-b-xl items-center gap-3 justify-between'>
+      <div className='flex p-4 px-2 md:px-16 top-0 fixed bg-gray-50 w-full rounded-b-xl items-center gap-3 justify-between'>
         <img src="/dimo-logo.svg" width={"120px"} alt="Logo" />
         <h1 className='text-xl font-bold'>AI PDF Q&A Reader</h1>
       </div>
 
-      <section className='w-full container mx-auto py-32'>
+      <section className='w-full container mx-auto md:px-0 px-6 py-32'>
 
         {Responses && Responses.map((response: responseDataTypes) => {
           return (
-            <div className='grid justify-items-stretch my-5'>
+            <div className='grid justify-items-stretch my-5' key={Responses.indexOf(response)}>
               <QuestionBox text={response.question}></QuestionBox>
               {response.answer && response.answer != "" && <AnswerBox text={response.answer}></AnswerBox>}
             </div>
@@ -87,8 +87,8 @@ function App() {
         })}
       </section>
 
-      <form className='flex mt-3 justify-center items-end  w-full gap-3 bottom-0 py-7 px-16 bg-gray-50 rounded-t-xl fixed'>
-        <Input value={userQuestion} disabled={Loading} onChange={handleUserInput} name="userQuestion" id="userQuestion" className='w-full p-6 rounded-full' placeholder='Ask a question about the PDF...' />
+      <form className='flex mt-3 justify-center items-end  w-full gap-3 bottom-0 py-7 px-2 md:px-16 bg-gray-50 rounded-t-xl fixed'>
+        <Input value={userQuestion} disabled={Loading} onChange={handleUserInput} name="userQuestion" id="userQuestion" className='w-full text-sm p-6 rounded-full' placeholder='Ask a question about the PDF...' />
         <Button disabled={Loading || status} onClick={handleSubmit} className='mt-3 rounded-full p-5'>{Loading ?
           <Tailspin
             size="20"
