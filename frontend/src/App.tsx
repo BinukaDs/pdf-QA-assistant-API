@@ -73,7 +73,7 @@ function App() {
       <Helmet>
         <title>DIMO AI Annual Report QA Reader</title>
         <meta name="description" content="DIMO AI Annual Report QA Reader" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/dimo-favicon.ico" />
       </Helmet>
       <section className=' flex flex-col h-screen'>
 
