@@ -11,6 +11,9 @@ const response = await fetch(
 );
 const dataBuffer = await response.buffer();
 
+// const pdfPath = "/Users/binukads/Desktop/DIMO-PLC-Annual-Report-2024-2025.pdf";
+// const dataBuffer = fs.readFileSync(pdfPath);
+
 export const parsePDF = async (req, res) => {
   try {
     const data = await PdfParse(dataBuffer);
