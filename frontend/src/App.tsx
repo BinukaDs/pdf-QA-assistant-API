@@ -6,7 +6,7 @@ import AnswerBox from './components/responses/answer'
 import { useState } from 'react'
 import axios from 'axios'
 import { Tailspin } from 'ldrs/react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
 import 'ldrs/react/Tailspin.css'
 
 interface responseDataTypes {
