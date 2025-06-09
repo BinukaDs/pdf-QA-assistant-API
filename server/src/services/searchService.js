@@ -1,14 +1,14 @@
 import { createSearchEmbeddings } from "./embeddingService.js";
 import { generateAnswer } from "./chatService.js";
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const jsonFilePath = path.join(__dirname, '../../data/embeddings.json');
-const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
+const jsonFilePath = path.join(__dirname, "../../data/embeddings.json");
+const jsonData = fs.readFileSync(jsonFilePath, "utf8");
 const parsedData = JSON.parse(jsonData);
 
 export const searchEmbeddings = async (req, res) => {
@@ -29,16 +29,16 @@ export const searchEmbeddings = async (req, res) => {
           score: score,
           page: page.page,
         };
-        // console.log("page: ", page.embedding);
       });
 
       scores.sort((a, b) => b.score - a.score);
 
-      const topScores = scores.slice(0, 3);
+      const topScores = scores.slice(0, 5);
 
       const topPages = topScores.map((score) => {
         return parsedData.find((p) => p.page === score.page);
       });
+      console.log("page: ", topPages);
 
       const answer = await generateAnswer(userQuestion, topPages);
       if (answer) {
