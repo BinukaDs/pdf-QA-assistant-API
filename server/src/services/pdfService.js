@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const response = await fetch(
-  "http://triad.lk/demo/dimo2024/v4/pdf/DIMO-PLC-Annual-Report-2023-2024.pdf"
+  "https://www.dimolanka.com/2024-2025-dimo-annual-report/DIMO-PLC-Annual-Report-2024-2025.pdf"
 );
 const dataBuffer = await response.buffer();
 
