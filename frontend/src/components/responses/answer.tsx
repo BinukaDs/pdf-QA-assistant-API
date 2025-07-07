@@ -1,4 +1,6 @@
 import { motion } from "motion/react"
+import ReactMarkdown from 'react-markdown'
+
 
 const AnswerBox = ({ text }: { text: string }) => {
     return (
@@ -10,7 +12,7 @@ const AnswerBox = ({ text }: { text: string }) => {
                 delay: 0.5,
                 ease: [0, 0.71, 0.2, 1.01],
             }} className='rounded-xl bg-accent text-white py-3 px-5 mt-5 mr-5 md:max-w-1/2 align-self-end'>
-            {text}
+            <ReactMarkdown>{text}</ReactMarkdown>
         </motion.div>
     )
 }
