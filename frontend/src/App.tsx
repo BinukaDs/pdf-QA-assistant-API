@@ -3,49 +3,86 @@ import { Button } from "@/components/ui/button"
 import { Input } from './components/ui/input'
 import QuestionBox from './components/responses/question'
 import AnswerBox from './components/responses/answer'
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Tailspin } from 'ldrs/react'
 import { Helmet } from 'react-helmet';
 import 'ldrs/react/Tailspin.css'
 
 interface responseDataTypes {
+  id?: number
   question: string
   answer?: string
 }
 function App() {
-  const [Responses, setResponses] = useState<responseDataTypes[]>([
-    {
-      question: "What is the purpose of this document?",
-      answer: "The purpose of this document is to provide an overview of the project and its objectives."
-    }
-  ]);
+
+  const responsesRef = useRef<responseDataTypes[]>(
+    [
+      {
+        id: 0,
+        question: "What is the purpose of this document?",
+        answer: "The purpose of this document is to provide an overview of the project and its objectives."
+      }
+    ]
+  )
   const [userQuestion, setUserQuestion] = useState<string>('');
   const [Loading, setLoading] = useState<boolean>(false);
   const [status, setStatus] = useState<boolean>(true);
   const BASE = import.meta.env.VITE_API_ADDRESS;
+  const [isVisible, setIsVisible] = useState<boolean>();
+  const visibleRef = useRef(0);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, {
+      threshold: 0.1
+    })
+    console.log(isVisible)
+    if (visibleRef.current) {
+      observer.observe(visibleRef.current);
+    }
+
+    return () => {
+      if (visibleRef.current) {
+        observer.unobserve(visibleRef.current);
+      }
+    };
+
+  }, []);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     setLoading(true);
 
-    console.log("Response without answer: ", Responses);
+    // console.log("Response without answer: ", responsesRef.current);
     if (userQuestion != "") {
+
+      responsesRef.current = [
+        ...responsesRef.current,
+        {
+          id: responsesRef.current.length,
+          question: userQuestion,
+        }
+      ]
+
+      setUserQuestion('');
+
       await axios.post(`${BASE}/embeddings/search/`, {
         userQuestion: userQuestion
       }).then((res) => {
         console.log(res.data);
 
-        setResponses([...Responses,
-        {
-          question: userQuestion,
+        responsesRef.current[responsesRef.current.length - 1] = {
+          ...responsesRef.current[responsesRef.current.length - 1],
           answer: res.data.answer
         }
-        ]);
-        setUserQuestion('');
+
+        
+
         setLoading(false);
-        console.log("Responses with answer: ", Responses);
+        // console.log("Responses with answer: ", responsesRef.current);
 
       }).catch((err) => {
         console.log(err);
@@ -74,7 +111,7 @@ function App() {
         <title>DIMO AI Annual Report QA Reader</title>
         <meta name="description" content="DIMO AI Annual Report QA Reader" />
         <link rel="icon" type="image/x-icon" href="/dimo-favicon.ico" />
-        <link rel="apple-touch-icon"  href="/dimo-favicon.ico"  />
+        <link rel="apple-touch-icon" href="/dimo-favicon.ico" />
 
       </Helmet>
       <section className=' flex flex-col h-screen'>
@@ -84,11 +121,10 @@ function App() {
           <h1 className='text-xl font-bold'>AI PDF Q&A Reader</h1>
         </div>
 
-        <section className='w-full container mx-auto md:px-0 px-6 py-32'>
-
-          {Responses && Responses.map((response: responseDataTypes) => {
+        <section ref={visibleRef} className='w-full container mx-auto md:px-0 px-6 py-32'>
+          {responsesRef && responsesRef.current.map((response: responseDataTypes) => {
             return (
-              <div className='grid justify-items-stretch my-5' key={Responses.indexOf(response)}>
+              <div className='grid justify-items-stretch my-5' key={responsesRef.current.indexOf(response)}>
                 <QuestionBox text={response.question}></QuestionBox>
                 {response.answer && response.answer != "" && <AnswerBox text={response.answer}></AnswerBox>}
               </div>
